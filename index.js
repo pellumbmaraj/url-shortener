@@ -9,6 +9,7 @@ const port = process.env.PORT || 3000;
 
 // In-memory storage for URL mappings
 let urlDatabase = {};
+let idCounter = 1;  // Simple counter for generating short URLs
 
 // Middleware
 app.use(cors());
@@ -31,11 +32,11 @@ app.post('/api/shorturl', function(req, res) {
 
   // Validate the URL
   if (!validUrl.isUri(url)) {
-    return res.status(400).json({ error: 'Invalid URL' });
+    return res.status(400).json({ error: 'invalid url' });
   }
 
-  // Generate a short URL
-  const shortUrl = Math.random().toString(36).substring(2, 8);  // Random short URL
+  // Generate a short URL ID (simple incremental counter)
+  const shortUrl = idCounter++;
 
   // Store the URL in the database (in-memory)
   urlDatabase[shortUrl] = url;
@@ -50,9 +51,10 @@ app.post('/api/shorturl', function(req, res) {
 // GET endpoint to redirect to the original URL
 app.get('/api/shorturl/:short', function(req, res) {
   const { short } = req.params;
+  const shortUrl = parseInt(short, 10);  // Convert to integer
 
   // Look up the short URL in the in-memory storage
-  const originalUrl = urlDatabase[short];
+  const originalUrl = urlDatabase[shortUrl];
 
   if (originalUrl) {
     // Redirect to the original URL
@@ -67,4 +69,3 @@ app.get('/api/shorturl/:short', function(req, res) {
 app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
-
