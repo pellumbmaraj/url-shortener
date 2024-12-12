@@ -1,25 +1,21 @@
 {
   "name": "shorturl",
-  "version": "1.0.0",
-  "description": "A URL Shortener Microservice for freeCodeCamp",
+  "version": "0.0.3",
+  "description": "API project for freeCodeCamp - URL Shortener",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
   },
   "dependencies": {
-    "body-parser": "^1.20.2",
+    "body-parser": "^1.19.0",
     "cors": "^2.8.5",
-    "dotenv": "^16.1.4",
-    "express": "^4.18.2",
-    "mongoose": "^7.5.1",
-    "shortid": "^2.2.16"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "valid-url": "^1.0.9"
   },
   "devDependencies": {
-    "nodemon": "^3.0.1"
+    "nodemon": "^2.0.22"
   },
-  "keywords": ["url-shortener", "microservice", "express", "mongodb"],
-  "author": "Your Name",
   "license": "MIT"
 }
-
